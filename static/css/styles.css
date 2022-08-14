@@ -1,0 +1,61 @@
+
+*{
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: sans-serif;
+  font-size: 16px;
+  width: 100%;
+  min-height: 100vh;
+}
+
+[class^="box-"] {
+	padding: 4px;
+  background-color: skyblue;
+/* To place the letter at the center */
+  display: grid;
+  place-items: center;
+}
+
+.container {
+  display: grid;
+  gap: 15px;
+  grid-template-columns: 200px auto 100px;
+  column-gap:  10px;
+	row-gap: 30px;
+
+  grid-template-rows: repeat(8, 1fr);
+/*
+  grid-template-rows: 200px auto 100px;
+	justify-items : stretch;
+	align-items : stretch;
+  justify-content: center;
+  align-content : space-around;
+*/
+	grid-template-areas: 
+	"A A A A   A A A A   A A A A"
+	"B B B B   B B B B   B B C C"
+	"B B B B   B B B B   B B C C"
+	"D D D D   D D D D   D D D D";
+
+}
+
+
+.box-1{
+  grid-area: A;
+}
+.box-2{
+  grid-area: B;
+}
+.box-3{
+  grid-area: C;
+}
+.box-4{
+  grid-area: D;
+}
+
+
+

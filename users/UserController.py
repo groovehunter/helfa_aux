@@ -10,6 +10,7 @@ lg = getLogger(__name__)
 
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_protect
+from .models import CustomUser
 
 
 class UserController(Controller):
@@ -44,16 +45,30 @@ class UserController(Controller):
 
     def tg_login_user(self):
         request = self.request
-        hash1 = request.GET.get('hash')
+        hash1 = request.GET.get('hash', None)
         lg.debug(hash1)
+        if not hash1:
+          return self.access_denied()
 
         result = verify_tg(request.GET)
 
         res = result['first_name'] 
-        lg.debug(res)
+      
+        lg.debug(result)
+        
+        user = CustomUser.get_or_create(username=result['username'])
+        lg.debug(user)
+        """
+        user = CustomUser.find(username=result['username'])
+        if not user:
+          user = CustomUser(username=result['username'], first_name=result['first_name'])
+          user.save()
+        """
+        login(request, user)
 
-        self.template_name = 'users/profile.html'
-        return self.render()
+        return self.redirect('/users/profile')
+#        self.template_name = 'users/profile.html'
+#        return self.render()
 
 
     def profile(self):

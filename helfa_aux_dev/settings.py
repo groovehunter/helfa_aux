@@ -8,7 +8,21 @@ from creds_my import mysql_pw
 from env import DATABASE_NAME #, ALLOWED_HOSTS
 ALLOWED_HOSTS = [
   'helfaauxdev123.loca.lt',
+'helfa99.loca.lt'
 ]
+TELEGRAM_BOT_NAME = 'helfa_aux_dev_bot'
+TELEGRAM_BOT_TOKEN = '5562362774:AAEQt9DXCvhzOhF639sd38hie7AfjRsvr18'
+TELEGRAM_LOGIN_REDIRECT_URL = 'https://helfa99.loca.lt/users/tg_login'
+
+#CSRF_TRUSTED_ORIGINS = 'https://'+ALLOWED_HOSTS[0]
+CSRF_TRUSTED_ORIGINS = [
+'https://helfaauxdev123.loca.lt',
+'https://helfa99.loca.lt',
+]
+#CSRF_COOKIE_SECURE = False
+
+
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -50,11 +64,6 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-#CSRF_TRUSTED_ORIGINS = 'https://'+ALLOWED_HOSTS[0]
-CSRF_TRUSTED_ORIGINS = [
-  'https://helfaauxdev123.loca.lt'
-]
-#CSRF_COOKIE_SECURE = False
 
 ROOT_URLCONF = 'helfa_aux_dev.urls'
 
@@ -136,10 +145,6 @@ STATICFILES_DIRS = [
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 ### dev 
-TELEGRAM_BOT_NAME = 'helfa_aux_dev_bot'
-TELEGRAM_BOT_TOKEN = '5562362774:AAEQt9DXCvhzOhF639sd38hie7AfjRsvr18'
-TELEGRAM_LOGIN_REDIRECT_URL = 'https://helfaauxdev123.loca.lt/users/tg_login'
-
 
 logfn_debug = LOG_DIR + '/debug.log'
 logfn_piheat= LOG_DIR + '/piheat.log'

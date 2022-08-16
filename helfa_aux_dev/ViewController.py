@@ -18,8 +18,7 @@ class ViewControllerSupport(BaseCtrl):
     def init_ctrl(self):
         self.context = {}
         self.fields_noshow = []
-        if DEBUG:
-            self.init_logging()
+        #if DEBUG: self.init_logging()
         if DEBUG2:
             self.context['debug2'] = True
         self.msg = ''

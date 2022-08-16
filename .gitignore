@@ -2,4 +2,12 @@
 __pycache__
 *.pyc
 
+env.py
+env2.py
 
+creds_my.py
+
+
+*.swp
+*.swo
+helfa_aux

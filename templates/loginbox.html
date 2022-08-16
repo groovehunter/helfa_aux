@@ -3,7 +3,7 @@
 <b>Login</b><br>
 
 
-<form action="/users/login" method="POST">
+<form action="{% url 'users:login' %}" method="POST">
 {% csrf_token %}
 <table>
 <tr width="50">

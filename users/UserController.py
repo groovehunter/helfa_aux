@@ -4,6 +4,7 @@ from django.contrib.auth.forms import AuthenticationForm
 
 from django.contrib.auth import login, logout
 from helfa_aux_dev.telegram import verify_tg
+from settings import FORCE_SCRIPT_NAME
 
 from logging import getLogger
 lg = getLogger(__name__)
@@ -30,7 +31,7 @@ class UserController(Controller):
                 lg.debug('user', user.username)
 
                 login(request, user)
-                return self.redirect('/users/profile')
+                return self.redirect('users/profile')
         else:
             form = AuthenticationForm()
         self.context['form'] = form
@@ -41,7 +42,7 @@ class UserController(Controller):
     def logout_user(self):
         request = self.request
         logout(request)
-        return self.redirect('/', msg='succesful logout')
+        return self.redirect(FORCE_SCRIPT_NAME, msg='succesful logout')
 
     def tg_login_user(self):
         request = self.request

@@ -1,7 +1,7 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 
-from .settings import TMPPATH, DEBUG, DEBUG2
+from .settings import TMPPATH, DEBUG, DEBUG2, FORCE_SCRIPT_NAME
 from .BaseCtrl import BaseCtrl
 from .telegram import prepare_login_widget
 import logging
@@ -12,8 +12,7 @@ class Controller(BaseCtrl):
 
     def __init__(self, request):
         self.context = {}
-        if DEBUG:
-            self.init_logging()
+        #if DEBUG: self.init_logging()
         if DEBUG2:
             self.context['debug2'] = True
         self.request = request
@@ -59,6 +58,6 @@ class Controller(BaseCtrl):
 
     def redirect(self, url, msg=''):
         if msg:
-            url = url + '?msg=' + msg
+            url = FORCE_SCRIPT_NAME + url + '?msg=' + msg
         return HttpResponseRedirect(url)
 

@@ -4,7 +4,7 @@ from django.contrib.auth.forms import AuthenticationForm
 
 from django.contrib.auth import login, logout
 from helfa_aux_dev.telegram import verify_tg
-from settings import FORCE_SCRIPT_NAME
+from helfa_aux_dev.settings import FORCE_SCRIPT_NAME
 
 from logging import getLogger
 lg = getLogger(__name__)
@@ -57,7 +57,7 @@ class UserController(Controller):
       
         lg.debug(result)
         
-        user = CustomUser.get_or_create(username=result['username'])
+        user, suc = CustomUser.objects.get_or_create(username=result['username'])
         lg.debug(user)
         """
         user = CustomUser.find(username=result['username'])

@@ -5,14 +5,12 @@ Django settings for helfa_aux_dev project.
 from pathlib import Path
 import os
 from creds_my import mysql_pw
-from env import DATABASE_NAME #, ALLOWED_HOSTS
+from env import DATABASE_NAME, ENV #, ALLOWED_HOSTS
+from env import TELEGRAM_BOT_NAME, TELEGRAM_BOT_TOKEN, TELEGRAM_LOGIN_REDIRECT_URL
 
 ALLOWED_HOSTS = [
 'helfa99.loca.lt'
 ]
-TELEGRAM_BOT_NAME = 'helfa_aux_dev_bot'
-TELEGRAM_BOT_TOKEN = '5562362774:AAEQt9DXCvhzOhF639sd38hie7AfjRsvr18'
-TELEGRAM_LOGIN_REDIRECT_URL = 'https://helfa99.loca.lt/users/tg_login'
 
 CSRF_TRUSTED_ORIGINS = [
 'https://helfa99.loca.lt',
@@ -27,8 +25,11 @@ BASE_NAME = 'helfa_aux_dev'
 TMPPATH = '/var/tmp/'+BASE_NAME
 LOG_DIR = TMPPATH + '/log'
 
-FORCE_SCRIPT_NAME = '/dj'
-#SITE_ROOT = 'https://helfa-augsburg.ddnss.de/dj'
+if ENV=='prod':
+  FORCE_SCRIPT_NAME = '/dj'
+else:
+  FORCE_SCRIPT_NAME = ''
+
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-h31p+=4b1boz(=(_g&6nz8#*1ljq7q22)qjm!z#9u^d+2-(yvd'

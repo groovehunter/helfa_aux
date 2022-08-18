@@ -7,13 +7,13 @@ lg = logging.getLogger()
 
 
 
-@ensure_csrf_cookie
+#@ensure_csrf_cookie
+
+
 def page(request, name):
   ctrl = PageController(request)
-  ctrl.name = name
-  ctrl.context.update( {'name': name} )
-  ctrl.template_name = 'page.html'
-  return ctrl.render()
+  return ctrl.page(name)
+
 
 def index(request):
   return page(request, 'one')

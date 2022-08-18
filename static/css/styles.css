@@ -23,11 +23,12 @@ body {
 .container {
   display: grid;
   gap: 15px;
-  grid-template-columns: 200px auto 100px;
+  grid-template-columns: 200px auto 200px;
   column-gap:  10px;
-	row-gap: 30px;
+	row-gap: 20px;
 
-  grid-template-rows: repeat(8, 1fr);
+  grid-auto-rows: max-content auto;
+  grid-template-rows: repeat(12, 1fr);
 /*
   grid-template-rows: 200px auto 100px;
 	justify-items : stretch;
@@ -36,10 +37,11 @@ body {
   align-content : space-around;
 */
 	grid-template-areas: 
-	"A A A A   A A A A   A A A A"
-	"B B B B   B B B B   B B C C"
-	"B B B B   B B B B   B B C C"
-	"D D D D   D D D D   D D D D";
+	"... A A A   A A A A   A A A ..."
+	"... B B B   B B B B   B C C ..."
+	"... B B B   B B B B   B C C ..."
+	"... D D D   D D D D   D D D ..."
+	"... D D D   D D D D   D D D ...";
 
 }
 
@@ -56,6 +58,9 @@ body {
 .box-4{
   grid-area: D;
 }
-
-
+/*
+.box-5{
+	grid-area: E;
+}
+*/
 

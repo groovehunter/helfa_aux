@@ -9,7 +9,8 @@ from env import DATABASE_NAME, ENV #, ALLOWED_HOSTS
 from env import TELEGRAM_BOT_NAME, TELEGRAM_BOT_TOKEN, TELEGRAM_LOGIN_REDIRECT_URL
 
 ALLOWED_HOSTS = [
-'helfa99.loca.lt'
+'helfa99.loca.lt',
+'localhost',
 ]
 
 CSRF_TRUSTED_ORIGINS = [
@@ -28,7 +29,7 @@ LOG_DIR = TMPPATH + '/log'
 if ENV=='prod':
   FORCE_SCRIPT_NAME = '/dj'
 else:
-  FORCE_SCRIPT_NAME = ''
+  FORCE_SCRIPT_NAME = '/'
 
 
 # SECURITY WARNING: keep the secret key used in production secret!

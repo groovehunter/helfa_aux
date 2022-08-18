@@ -57,7 +57,10 @@ class Controller(BaseCtrl):
         return self.response
 
     def redirect(self, url, msg=''):
+        lg.debug(url)
+        url = FORCE_SCRIPT_NAME + url
         if msg:
-            url = FORCE_SCRIPT_NAME + url + '?msg=' + msg
+            url = url + '?msg=' + msg
+        lg.debug(url)
         return HttpResponseRedirect(url)
 

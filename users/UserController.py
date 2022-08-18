@@ -42,7 +42,8 @@ class UserController(Controller):
     def logout_user(self):
         request = self.request
         logout(request)
-        return self.redirect(FORCE_SCRIPT_NAME, msg='succesful logout')
+        return self.redirect('page/one', msg='succesful logout')
+
 
     def tg_login_user(self):
         request = self.request
@@ -52,12 +53,14 @@ class UserController(Controller):
           return self.access_denied()
 
         result = verify_tg(request.GET)
-
-        res = result['first_name'] 
+        
       
         lg.debug(result)
+        lg.debug(dir(result))
         
         user, suc = CustomUser.objects.get_or_create(username=result['username'])
+        user.first_name = result['first_name'] 
+        user.save()
         lg.debug(user)
         """
         user = CustomUser.find(username=result['username'])

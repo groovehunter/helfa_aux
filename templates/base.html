@@ -29,15 +29,15 @@
   <div class="box-3">
 		{% if username %}
 				logged in as {{username}}
-				<a href="/users/logout">Logout<a/>
+				<a href="{{pre}}/users/logout">Logout<a/>
 		{% else %}
 			{% include "loginbox.html" %}
 		{% endif %}
 	</div>
+
   <div class="box-4">
 		{% include "footer.html" %}
 	</div>
-
 
 </div>
 

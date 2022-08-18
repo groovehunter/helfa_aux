@@ -1,7 +1,7 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 
-from .settings import TMPPATH, DEBUG, DEBUG2, FORCE_SCRIPT_NAME
+from .settings import TMPPATH, DEBUG, DEBUG2, FORCE_SCRIPT_NAME 
 from .BaseCtrl import BaseCtrl
 from .telegram import prepare_login_widget
 import logging
@@ -11,7 +11,11 @@ lg = logging.getLogger('root')
 class Controller(BaseCtrl):
 
     def __init__(self, request):
-        self.context = {}
+        lg.debug('=========================================  init Controller')
+        self.context = {
+          'pre' : FORCE_SCRIPT_NAME,
+        }
+
         #if DEBUG: self.init_logging()
         if DEBUG2:
             self.context['debug2'] = True

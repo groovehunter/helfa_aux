@@ -24,14 +24,15 @@ CSRF_TRUSTED_ORIGINS = [
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 BASE_NAME = 'helfa_aux_dev'
-TMPPATH = '/var/tmp/'+BASE_NAME
-LOG_DIR = TMPPATH + '/log'
 
 if ENV=='prod':
   FORCE_SCRIPT_NAME = '/dj'
+  TMPPATH = '/var/www/django/helfa_aux/tmp'
 else:
   FORCE_SCRIPT_NAME = '/'
+  TMPPATH = '/var/tmp/'+BASE_NAME
 
+LOG_DIR = TMPPATH + '/log'
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-h31p+=4b1boz(=(_g&6nz8#*1ljq7q22)qjm!z#9u^d+2-(yvd'
@@ -164,6 +165,7 @@ LOGGING = {
             'style': '{',
         },
     },
+
     'handlers': {
         'file': {
             'level': 'DEBUG',
@@ -180,4 +182,3 @@ LOGGING = {
         },
     },
 }
-

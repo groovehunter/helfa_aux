@@ -31,7 +31,7 @@ class UserController(Controller):
                 lg.debug('user', user.username)
 
                 login(request, user)
-                return self.redirect('users/profile')
+                return self.redirect('/users/profile')
         else:
             form = AuthenticationForm()
         self.context['form'] = form
@@ -42,7 +42,7 @@ class UserController(Controller):
     def logout_user(self):
         request = self.request
         logout(request)
-        return self.redirect('page/one', msg='succesful logout')
+        return self.redirect('/page/one', msg='succesful logout')
 
 
     def tg_login_user(self):

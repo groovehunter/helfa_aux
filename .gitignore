@@ -12,3 +12,4 @@ creds_my.py
 *.swo
 helfa_aux
 con/
+tmp/

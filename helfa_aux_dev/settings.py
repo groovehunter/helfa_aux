@@ -164,6 +164,19 @@ LOGGING = {
         },
     },
     'handlers': {
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': logfn_debug,
+            'formatter': 'verbose',
+        },
+    },
+    'loggers': {
+        'root': {
+            'handlers': ['file'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
     },
 }
 

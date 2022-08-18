@@ -26,7 +26,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 BASE_NAME = 'helfa_aux_dev'
 
 if ENV=='prod':
-  FORCE_SCRIPT_NAME = '/dj'
+  FORCE_SCRIPT_NAME = '/dj/'
+  #FORCE_SCRIPT_NAME = '/dj'
   TMPPATH = '/var/www/django/helfa_aux/tmp'
 else:
   FORCE_SCRIPT_NAME = '/'

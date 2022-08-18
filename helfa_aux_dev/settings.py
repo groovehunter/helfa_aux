@@ -9,6 +9,7 @@ from env import DATABASE_NAME, ENV #, ALLOWED_HOSTS
 from env import TELEGRAM_BOT_NAME, TELEGRAM_BOT_TOKEN, TELEGRAM_LOGIN_REDIRECT_URL
 
 ALLOWED_HOSTS = [
+'helfa-augsburg.ddnss.de',
 'helfa99.loca.lt',
 'localhost',
 ]

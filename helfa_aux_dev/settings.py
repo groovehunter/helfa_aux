@@ -19,6 +19,7 @@ CSRF_TRUSTED_ORIGINS = [
 'https://helfa-augsburg.ddnss.de',
 ]
 #CSRF_COOKIE_SECURE = False
+SECURE_CROSS_ORIGIN_OPENER_POLICY = 'same-origin-allow-popups'
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.

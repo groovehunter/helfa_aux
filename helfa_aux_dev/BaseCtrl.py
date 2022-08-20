@@ -2,6 +2,8 @@
 import yaml
 from os.path import join
 from .settings import BASE_DIR, TMPPATH, BASE_NAME
+from .telegram import prepare_login_widget
+
 import logging
 lg = logging.getLogger('root')
 

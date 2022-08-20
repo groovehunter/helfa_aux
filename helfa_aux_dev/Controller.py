@@ -3,7 +3,6 @@ from django.template import loader
 
 from .settings import TMPPATH, DEBUG, DEBUG2, FORCE_SCRIPT_NAME 
 from .BaseCtrl import BaseCtrl
-from .telegram import prepare_login_widget
 import logging
 lg = logging.getLogger('root')
 

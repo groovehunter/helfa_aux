@@ -21,6 +21,7 @@ body {
 }
 
 .container {
+	margin: 15px;
   display: grid;
   gap: 15px;
   grid-template-columns: 200px auto 200px;
@@ -37,11 +38,10 @@ body {
   align-content : space-around;
 */
 	grid-template-areas: 
-	"... A A A   A A A A   A A A ..."
-	"... B B B   B B B B   B C C ..."
-	"... B B B   B B B B   B C C ..."
-	"... D D D   D D D D   D D D ..."
-	"... D D D   D D D D   D D D ...";
+	"A A A A   A A A A   A A A A"
+	"B B B B   B B B B   B C C C"
+	"B B B B   B B B B   B C C C"
+	"D D D D   D D D D   D D D D"
 
 }
 

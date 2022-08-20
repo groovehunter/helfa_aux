@@ -45,7 +45,20 @@ class BaseCtrl:
         self.context['menudata'] = menudata
 #        self.lg.debug('menudata %s', menudata)
 
+    def check_user(self):
+        lg.debug('check_user')
+        lg.debug(self.request.user)
+        if self.request.user.is_authenticated:
+          self.context['logged_in'] = True
+          self.context['username'] = self.request.user.username
+        else:
+          self.prepare_tg_widget()
 
+    def prepare_tg_widget(self):
+        widget = prepare_login_widget()
+        self.context['telegram_login_widget'] = widget        
+
+    """
     def init_logging(self):
         self.lg = logging.getLogger('test')
         if not getattr(self.lg, 'handler_set', None):
@@ -56,7 +69,7 @@ class BaseCtrl:
             self.lg.addHandler(fh)
             self.lg.setLevel(logging.DEBUG)
         self.handler_set = True
-
+    """
 
     def access_denied(self):
         # self.context needed

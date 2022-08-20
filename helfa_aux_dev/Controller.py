@@ -12,6 +12,7 @@ class Controller(BaseCtrl):
 
     def __init__(self, request):
         lg.debug('=========================================  init Controller')
+        self.context = {}
         self.context = {
           'pre' : FORCE_SCRIPT_NAME,
         }
@@ -23,20 +24,6 @@ class Controller(BaseCtrl):
         # correct location to check user?
         self.check_user()
         self.init_ctrl()
-
-    def check_user(self):
-        lg.debug('check_user')
-        lg.debug(self.request.user)
-        if self.request.user.is_authenticated:
-          self.context['logged_in'] = True
-          self.context['username'] = self.request.user.username
-        else:
-          self.prepare_tg_widget()
-
-    def prepare_tg_widget(self):
-        widget = prepare_login_widget()
-        self.context['telegram_login_widget'] = widget        
-
 
     def init_ctrl(self):
         self.msg = ''

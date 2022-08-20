@@ -14,17 +14,14 @@ class ViewControllerSupport(BaseCtrl):
         - navigation blocks
         - custom render method
     """
+    context = {}
 
     def init_ctrl(self):
-        self.context = {}
+        self.check_user()
         self.fields_noshow = []
-        #if DEBUG: self.init_logging()
         if DEBUG2:
             self.context['debug2'] = True
         self.msg = ''
-        self.context['logged_in'] = True
-        self.context['prefix_static'] = '/static/'
-        self.context['common_static'] = '/static/'
         self.context['show_nav'] = True   # show navbar by default
 
         self.yaml_load()

@@ -13,7 +13,7 @@ class ItemListView(ListView, ViewControllerSupport):
     model = Item
 
     def get_context_data(self, **kwargs):
-        # self.init_ctrl()
+        self.init_ctrl()
         context = super().get_context_data(**kwargs)
         c = self.listview_helper()
         context.update(c)

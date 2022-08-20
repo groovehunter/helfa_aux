@@ -30,9 +30,11 @@ if ENV=='prod':
   FORCE_SCRIPT_NAME = '/dj/'
   #FORCE_SCRIPT_NAME = '/dj'
   TMPPATH = '/var/www/django/helfa_aux/tmp'
-else:
+elif ENV=='dev':
   FORCE_SCRIPT_NAME = '/'
   TMPPATH = '/var/tmp/'+BASE_NAME
+else:
+  raise ValueError("ENV not set")
 
 LOG_DIR = TMPPATH + '/log'
 

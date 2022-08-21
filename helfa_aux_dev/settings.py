@@ -21,6 +21,7 @@ CSRF_TRUSTED_ORIGINS = [
 #CSRF_COOKIE_SECURE = False
 SECURE_CROSS_ORIGIN_OPENER_POLICY = 'same-origin-allow-popups'
 
+MAX_LENGTH = 35
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -60,6 +61,7 @@ INSTALLED_APPS = [
     'django_tables2',
     'users',
     'verschenka',
+    'mptt',
 ]
 
 MIDDLEWARE = [

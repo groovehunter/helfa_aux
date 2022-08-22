@@ -28,7 +28,7 @@
 	</div>
 
   <div class="box-3">
-		{% if username %}
+		{% if logged_in %}
 				logged in as {{username}}
 				<a href="{{pre}}users/logout">Logout<a/>
 		{% else %}

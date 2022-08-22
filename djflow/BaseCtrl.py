@@ -54,8 +54,9 @@ class BaseCtrl:
           self.context['logged_in'] = True
           self.context['username'] = self.request.user.username
         else:
+          self.context['logged_in'] = False
           self.prepare_tg_widget()
-          self.context['username'] = "Not logged in"
+          self.context['username'] = "Nobody !"
 
     def prepare_tg_widget(self):
         widget = prepare_login_widget()

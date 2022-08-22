@@ -1,7 +1,6 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
-
-from .settings import TMPPATH, DEBUG, DEBUG2, FORCE_SCRIPT_NAME 
+from django.conf import settings
 from .BaseCtrl import BaseCtrl
 import logging
 lg = logging.getLogger('root')
@@ -13,11 +12,11 @@ class Controller(BaseCtrl):
         lg.debug('=========================================  init Controller')
         self.context = {}
         self.context = {
-          'pre' : FORCE_SCRIPT_NAME,
+          'pre' : settings.FORCE_SCRIPT_NAME,
         }
 
         #if DEBUG: self.init_logging()
-        if DEBUG2:
+        if settings.DEBUG2:
             self.context['debug2'] = True
         self.request = request
         # correct location to check user?
@@ -48,7 +47,7 @@ class Controller(BaseCtrl):
 
     def redirect(self, url, msg=''):
         lg.debug(url)
-        url = FORCE_SCRIPT_NAME + url
+        url = settings.FORCE_SCRIPT_NAME + url
         if msg:
             url = url + '?msg=' + msg
         lg.debug(url)

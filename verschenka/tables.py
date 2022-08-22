@@ -1,4 +1,4 @@
-from helfa_aux_dev.FlowBaseTable import FlowBaseTable
+from djflow.FlowBaseTable import FlowBaseTable
 from .models import Item
 import django_tables2 as tables
 

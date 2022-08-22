@@ -4,8 +4,8 @@ from django.shortcuts import render
 from django.views import generic
 from .models import Item, Category
 from django.views.generic import ListView, DetailView, CreateView, TemplateView
-from helfa_aux_dev.ViewController import ViewControllerSupport
-from helfa_aux_dev.Controller import Controller
+from djflow.ViewController import ViewControllerSupport
+from djflow.Controller import Controller
 from .tables import ItemTable
 
 import logging

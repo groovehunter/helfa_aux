@@ -1,8 +1,8 @@
 
 import yaml
 from os.path import join
-from .settings import BASE_DIR, TMPPATH, BASE_NAME
-from .telegram import prepare_login_widget
+from django.conf import settings
+from helfa_aux_dev.telegram import prepare_login_widget
 
 import logging
 lg = logging.getLogger('root')
@@ -12,7 +12,7 @@ class BaseCtrl:
     """ common methods for gui """
 
     def yaml_load(self):
-        c = open(join(BASE_DIR, 'helfa_aux_dev/menu.yaml'), encoding='utf8').read()
+        c = open(join(settings.BASE_DIR, 'djflow/menu.yaml'), encoding='utf8').read()
         lg.debug('loading menu')
         self.tree = yaml.load(c, Loader=yaml.BaseLoader)
 

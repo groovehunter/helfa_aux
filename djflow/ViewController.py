@@ -1,7 +1,7 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
+from django.conf import settings
 
-from .settings import BASE_DIR, TMPPATH, DEBUG, DEBUG2
 from .BaseCtrl import BaseCtrl
 
 import logging
@@ -23,7 +23,7 @@ class ViewControllerSupport(BaseCtrl):
         lg.debug('init_ctrl - VCS')
         self.check_user()
         self.fields_noshow = []
-        if DEBUG2:
+        if settings.DEBUG2:
             self.context['debug2'] = True
         self.msg = ''
         self.context['show_nav'] = True   # show navbar by default
@@ -55,7 +55,7 @@ class ViewControllerSupport(BaseCtrl):
             'keys'  : self.fields,
             'url'   : url,
         }
-        if DEBUG:
+        if settings.DEBUG:
             c['debug'] = True
             c['test'] = test
         return c
@@ -81,7 +81,7 @@ class ViewControllerSupport(BaseCtrl):
             'url'   : url,
             'url_detail': url_detail,
         }
-        if DEBUG:
+        if settings.DEBUG:
             c['debug'] = True
         return c
 
@@ -94,3 +94,4 @@ class ViewControllerSupport(BaseCtrl):
         response = HttpResponse( )
         response.write(html)
         return response
+

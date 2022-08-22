@@ -1,5 +1,4 @@
-from helfa_aux_dev.Controller import Controller
-### XXX move all Controllers in parent directory 
+from djflow.Controller import Controller
 from django.contrib.auth.forms import AuthenticationForm
 
 from django.contrib.auth import login, logout

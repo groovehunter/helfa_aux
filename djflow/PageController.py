@@ -1,4 +1,4 @@
-from .settings import BASE_DIR
+from django.conf import settings
 import os
 
 from .Controller import Controller
@@ -17,7 +17,7 @@ class PageController(Controller):
     def page(self, name):
       self.name = name
       rpath = 'con/'+name+'.md'
-      with open(os.path.join(BASE_DIR, rpath)) as f:
+      with open(os.path.join(settings.BASE_DIR, rpath)) as f:
         content = f.read()
 
       self.context.update( 

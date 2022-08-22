@@ -2,10 +2,16 @@
 
 {% block title %}{{category.name}} list of items{% endblock %}
 
+{% block tree %}
+		{% include "items/cat_list_inc.html" %}
+	{% comment %}
+	{% endcomment %}
+{% endblock %}
+
 {% block content %}
 <main>
     <section>
-	<div class="container">
+	<div class="">
 	    <h1>{{category}} items</h1>
 	    <p>{{category.description}}.</p>
 	</div>
@@ -43,3 +49,4 @@
     </div>
 </main>
 {% endblock %}
+

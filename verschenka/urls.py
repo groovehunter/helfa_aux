@@ -7,6 +7,7 @@ app_name = 'verschenka'
 
 urlpatterns = [
 #    path('grid', views.ItemListView.as_view()),
+    path('some', views.SomeView.as_view()),
     path('index', views.ItemListView.as_view(), name='index'),
 #    path('index', views.index),
     path('cats', views.CategoryListView.as_view() , name='category-list'),

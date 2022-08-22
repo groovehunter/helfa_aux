@@ -10,13 +10,17 @@ lg = logging.getLogger('root')
 class ViewControllerSupport(BaseCtrl):
     """ lightweight ctrl methods to add abilities to django
         generic views:
-        - logging
         - navigation blocks
         - custom render method
     """
     context = {}
 
+    def get_user_context(self):
+        self.check_user()
+        return self.context
+        
     def init_ctrl(self):
+        lg.debug('init_ctrl - VCS')
         self.check_user()
         self.fields_noshow = []
         if DEBUG2:

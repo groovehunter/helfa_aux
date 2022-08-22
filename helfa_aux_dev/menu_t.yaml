@@ -24,3 +24,13 @@
       - name: user logout
         href: /users/lo
 
+- categories:
+    id:     categories
+    name:   Kategorien
+    href:   cats
+    urlname: verschenka:category-list
+    links:
+      - name: cat 1
+        href: cats/schuhe
+
+

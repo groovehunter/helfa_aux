@@ -1,14 +1,9 @@
-{% extends "base.html" %} 
 {% load mptt_tags %}
-
-{% block title %}List of categories{% endblock %}
-
-{% block content %}
 
 <div>
     <div>
 	<ul>
-	{% recursetree object_list %}
+	{% recursetree cat_obj_list %}
 	    <li>
 			<a href="{{node.get_absolute_url}}">{{node.name}}</a>
 			{% if not node.is_leaf_node %}
@@ -22,5 +17,3 @@
     </div>
 </div>
 
-
-{% endblock %}

@@ -14,3 +14,7 @@ helfa_aux
 con/
 tmp/
 migrations/
+
+*.json
+fixtures/
+fix_*

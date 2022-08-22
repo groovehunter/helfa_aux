@@ -17,8 +17,11 @@
 <div class="container">
 
   <div class="box-1">
-		{% include "header.html" %}
 		{% include "navbar.html" %}
+	</div>
+
+  <div class="box-5">
+		{% include "header.html" %}
 	</div>
 
   <div class="box-2">
@@ -28,14 +31,22 @@
 	</div>
 
   <div class="box-3">
-		{% if logged_in %}
-				logged in as {{username}}
-				<a href="{{pre}}users/logout">Logout<a/>
-		{% else %}
-			{% include "loginbox.html" %}
-		{% endif %}
-		{% block tree %}
-		{% endblock %}
+		<div class="round">
+			{% if logged_in %}
+					logged in as {{username}}
+					<a href="{{pre}}users/logout">Logout<a/>
+			{% else %}
+				{% include "loginbox.html" %}
+			{% endif %}
+		</div>
+
+		<div class="round">
+			{% block tree %}
+				<div>
+					<!-- optional navigation trees -->
+				</div>
+			{% endblock %}
+		</div>
 	</div>
 
 {% comment %}

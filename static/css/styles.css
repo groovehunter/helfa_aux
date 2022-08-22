@@ -8,29 +8,28 @@
 body {
   font-family: sans-serif;
   font-size: 16px;
-  width: 100%;
   min-height: 100vh;
 }
 
 [class^="box-"] {
-	padding: 4px;
+	padding: 6px;
   background-color: skyblue;
-/* To place the letter at the center */
   display: grid;
   place-items: center;
 }
 
 .container {
-	margin: 15px;
   display: grid;
-  gap: 15px;
-  grid-template-columns: 200px auto 200px;
-  column-gap:  10px;
 	row-gap: 20px;
-
-  grid-auto-rows: max-content auto;
-  grid-template-rows: repeat(12, 1fr);
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: repeat(4 1fr);
 /*
+  gap: 15px;
+  column-gap: 10px;
+	margin: 15px;
+200px auto 200px;
+  grid-auto-rows: 100px  auto 100px;
+  width: 90%;
   grid-template-rows: 200px auto 100px;
 	justify-items : stretch;
 	align-items : stretch;
@@ -38,7 +37,7 @@ body {
   align-content : space-around;
 */
 	grid-template-areas: 
-	"A A A A   A A A A   A A A A"
+	"A A A A   A A A A   A E E E"
 	"B B B B   B B B B   B C C C"
 	"B B B B   B B B B   B C C C"
 	"D D D D   D D D D   D D D D"
@@ -52,15 +51,30 @@ body {
 .box-2{
   grid-area: B;
 }
-.box-3{
+
+.box-3 {		/* Sidebar - Login - Tree nav */
   grid-area: C;
 }
 .box-4{
   grid-area: D;
 }
-/*
 .box-5{
 	grid-area: E;
 }
+/*
+	align-self: start;
+	align-self: stretch;
+	border: 3px solid darkblue;
 */
+
+.round {
+	height: 90%;
+	width: 90%;
+	background-color: lightgrey;
+	border-radius: 20px;
+	padding: 20px 20px;
+	text-align: center;
+}	
+
+
 

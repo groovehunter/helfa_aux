@@ -80,10 +80,10 @@ class CategoryListView(ListView, ViewControllerSupport):
     def get_context_data(self, **kwargs):
         self.fields_noshow = []
         context = super().get_context_data(**kwargs)
+        lg.debug(context)
         c = self.listview_helper()
         context.update(self.get_user_context())
         context.update(c)
-        lg.debug(context)
         return context
 
 

@@ -27,10 +27,10 @@
 - categories:
     id:     categories
     name:   Kategorien
-    href:   cats
+    href:   cat/root/
     urlname: verschenka:category-list
     links:
-      - name: cat 1
-        href: cats/schuhe
+      - name: cat Schuhe
+        href: cat/schuhe
 
 

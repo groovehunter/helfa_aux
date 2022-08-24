@@ -33,4 +33,11 @@
       - name: cat Schuhe
         href: cat/schuhe
 
-
+- admin:
+    id:     admin
+    name:   Admin
+    href:   /admin
+    urlname:  admin:index
+    links:
+      - name: Admin cat
+      - href: /admin/category

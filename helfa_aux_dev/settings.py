@@ -6,7 +6,7 @@ from pathlib import Path
 import os
 from creds_my import mysql_pw
 from env import DATABASE_NAME, ENV #, ALLOWED_HOSTS
-from env import TELEGRAM_BOT_NAME, TELEGRAM_BOT_TOKEN, TELEGRAM_LOGIN_REDIRECT_URL
+from env import TELEGRAM_BOT_NAME, TELEGRAM_BOT_TOKEN, TELEGRAM_LOGIN_REDIRECT_URL, TELEGRAM
 
 ALLOWED_HOSTS = [
 'helfa-augsburg.ddnss.de',

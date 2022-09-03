@@ -62,6 +62,8 @@ INSTALLED_APPS = [
     'users',
     'verschenka',
     'mptt',
+    'django_tgbot',
+    'helfa_aux_dev_bot',
 ]
 
 MIDDLEWARE = [

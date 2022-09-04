@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 
-{% block content %}
-mypage {{name}}
+{% block title %}
+	mypage {{name}}
+{% endblock %}
 
-<div>
-{{content}}
-</div>
+{% block content %}
+	{{content}}
 {% endblock %}

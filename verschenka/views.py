@@ -4,33 +4,97 @@ from django.shortcuts import render
 from django.views import generic
 from .models import Item, Category
 from django.views.generic import ListView, DetailView, CreateView, TemplateView
-from djflow.ViewController import ViewControllerSupport
+from django.views.generic import FormView, UpdateView
+from djflow.ViewController import ViewControllerSupport, DjMixin
 from djflow.Controller import Controller
 from .tables import ItemTable
+from .forms import ItemForm
+from django.shortcuts import render
+
 
 import logging
 lg = logging.getLogger('root')
 
-class SomeView(TemplateView):
-  template_name = 'about.html'
-
-
-class VerschenkaController(Controller):
-  def __init__(self, request):
-    Controller.__init__(request)
-
-  def itemlist(self):
-    pass
-
-class ItemListView(ListView, ViewControllerSupport):
+class ItemUpdateView(UpdateView, DjMixin):
     model = Item
+    form_class = ItemForm
+    template_name = 'items/item_form.html'
+    success_url = '/verschenka/item/detail'
+    pk_url_kwargs = 'slug'
 
     def get_context_data(self, **kwargs):
-        self.init_ctrl()
         context = super().get_context_data(**kwargs)
-        c = self.listview_helper()
+        c = DjMixin.get_context_data(self)
         context.update(c)
-        #lg.debug(context)
+        return context
+
+class ItemCreateView(CreateView, DjMixin):
+    form_class = ItemForm
+    template_name = 'items/item_form.html'
+    success_url = '/verschenka/item/detail'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        c = DjMixin.get_context_data(self)
+        context.update(c)
+        return context
+
+
+
+class MyFormView(FormView, DjMixin): #, ViewControllerSupport):
+    form_class = ItemForm
+    template_name = 'items/item_form.html'
+    success_url = '/verschenka/item/detail'
+    pk_url_kwargs = 'slug'
+
+    def get_object(self, **kwargs):
+        lg.debug('get_object', kwargs)
+        pk = self.kwargs.get(self.pk_url_kwarg)
+        slug = self.kwargs.get(self.slug_url_kwarg)
+        if pk is not None:
+            queryset = queryset.filter(pk=pk)
+            obj = queryset.get()
+        return obj
+
+    def post(self, request, *args, **kwargs):
+        lg.debug('ICV post')
+        if not request.user.is_authenticated:
+            return HttpResponseForbidden()
+        self.object = self.get_object()
+        form = self.get_form()
+        if form.is_valid():
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        c = self.check_user()
+        self.yaml_load()
+        menudata = self.yamlmenu()
+        menu = {'menudata': menudata}
+        context.update(menu)
+        context.update(c) 
+        return context
+   
+    def get_form_kwargs(self):
+        kwargs = super(MyFormView, self).get_form_kwargs()
+        return kwargs
+
+
+
+
+
+
+
+class ItemListView(ListView, DjMixin): #ViewControllerSupport):
+    model = Item
+    template_name = 'generic/page_djtable.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        c = DjMixin.get_context_data(self)
+        context.update(c)
         return context
 
     def get(self, request, *args, **kwargs):
@@ -38,38 +102,45 @@ class ItemListView(ListView, ViewControllerSupport):
             return self.access_denied()
         self.object_list = self.get_queryset()
         self.fields_noshow = []
-        self.init_ctrl()
         table = ItemTable(self.object_list) #, template_name="generic/table.html" )
-        self.context['table'] = table
-        self.template_name = 'generic/page_djtable.html'
-        #self.template_name = 'verschenka/index.html'
-        lg.debug(self.template_name)
+        context = {}
+        context['table'] = table
+        context.update(self.get_context_data())
+        return self.render_to_response(context)
 
-        self.context.update(self.get_context_data())
-        return self.render()
+from django.http import Http404
 
-
-
-class ItemDetailView(DetailView, ViewControllerSupport):
+class ItemDetailView(DetailView, DjMixin): #ViewControllerSupport):
     model = Item
+    template_name = 'items/item_detail.html'
+    pk_url_kwargs = 'slug'
 
     def get_context_data(self, **kwargs):
-        self.init_ctrl()
         context = super().get_context_data(**kwargs)
-        c = self.listview_helper()
+        c = DjMixin.get_context_data(self)
         context.update(c)
-        #lg.debug(context)
         return context
 
+    def get_object(self, **kwargs):
+        pk = self.kwargs.get(self.pk_url_kwarg)
+        slug = self.kwargs.get(self.slug_url_kwarg)
+        obj = None
+        if pk is not None:
+            queryset = queryset.filter(pk=pk)
+            obj = queryset.get()
+        if not obj:
+            raise Http404
+        return obj
+
     def get(self, request, *args, **kwargs):
+        super().get(request, *args, **kwargs)
         if not request.user.is_authenticated:
             return self.access_denied()
-        self.init_ctrl()
-        self.object = self.get_queryset()
-        self.template_name = 'items/item_detail.html'
-
-        self.context.update(self.get_context_data())
-        return self.render()
+        context = {'object': self.get_object() }
+        #context = {}
+        context.update(self.get_context_data())
+        lg.debug(context)
+        return self.render_to_response(context)
 
 
 

@@ -4,12 +4,17 @@
 {% block title %}Item details{% endblock %}
 
 {% block content %}
-
+<p>
 link
-		<a href="{{node.get_absolute_url}}">{{node.name}}</a>
+		<a href="{{object.get_absolute_url}}">{{obj.name}}</a>
 
 object
 {{object.name}}
 {{object.slug}}
+</p>
 
 {% endblock %}
+
+{% comment %}
+	{% include "generic/detail_obj_inc.html" %}
+{% endcomment %}

@@ -81,7 +81,9 @@ ROOT_URLCONF = 'helfa_aux_dev.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [ os.path.join(BASE_DIR, 'templates'),
+                  os.path.join(BASE_DIR, 'djflow/templates'),
+                 ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

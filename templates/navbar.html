@@ -1,7 +1,42 @@
 
-<div id="dropdown" class="">
-  {% for section in menudata %}
-    <a href="{% url section.urlname %}" class="">{{section.name}}</a>
-  {% endfor %}
+{% comment %}
+
+<div>
+   <ul id="coolMenu">
+    <li><a href="#">Lorem</a></li>
+    <li><a href="#">Mauricii</a></li>
+    <li>
+        <a href="#">Periher</a>
+        <ul>
+            <li><a href="#">Hellenico</a></li>
+            <li><a href="#">Genere</a></li>
+            <li><a href="#">Indulgentia</a></li>
+        </ul>
+    </li>
+    <li><a href="#">Tyrio</a></li>
+    <li><a href="#">Quicumque</a></li>
+   </ul>
 </div>
 
+{% endcomment %}
+
+
+
+<div>
+  <ul id="coolMenu">
+  {% for section in menudata %}
+    <li>
+      <a href="{% url section.urlname %}" class="">{{section.name}}</a>
+
+      <ul>
+      {% for link in section.links %}
+        <li>
+          <a href="{% url link.urlname %}" class="">{{link.name}}</a>
+        </li>
+      {% endfor %}
+      </ul>
+    </li>
+
+  {% endfor %}
+  </ul>
+</div>

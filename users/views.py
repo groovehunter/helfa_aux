@@ -1,16 +1,50 @@
 
 from django.urls import reverse_lazy
 from django.contrib.auth import get_user_model
-from django.views.generic.edit import CreateView
+from django.views.generic import CreateView, ListView, DetailView
 from users.models import CustomUser
 
 from .forms import CustomUserCreationForm, CustomUserEditForm
 from .UserController import UserController
+from djflow.ViewController import DjMixin
+
+class UserListView(ListView, DjMixin):
+    model = CustomUser
+    template_name = 'users/index.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        c = DjMixin.get_context_data(self)
+        context.update(c)
+        return context
+
+    def get(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            #return self.access_denied()
+            pass
+        self.object_list = self.get_queryset()
+        context = self.get_context_data()
+        """
+        fields = ['username', 'email']
+        context['fields'] = fields
+        """
+        context['object_list'] = self.object_list   # XXX DRY !
+        return self.render_to_response(context)
 
 
-def profile(request):
-    ctrl = UserController(request)
-    return ctrl.profile()
+class UserDetailView(DetailView, DjMixin):
+    model = CustomUser
+    template_name = 'users/profile.html'
+    pk_url_kwargs = 'username'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        c = DjMixin.get_context_data(self)
+        context.update(c)
+        return context
+
+    def get_object(self, queryset=None):
+        return CustomUser.objects.get(username=self.kwargs.get("username"))
 
 
 def tg_login(request):

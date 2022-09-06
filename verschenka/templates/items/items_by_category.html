@@ -1,9 +1,11 @@
 {% extends "base.html" %}
 
-{% block title %}{{category.name}} list of items{% endblock %}
+{% block title %}{{category.name}}Alle Angebote{% endblock %}
 
 {% block tree %}
-		{% include "items/cat_list2.html" %}
+		{% if cat_defined %}
+			{% include "items/cat_list2.html" %}
+		{% endif %}
 	{% comment %}
 		{% include "items/cat_list_inc.html" %}
 	{% endcomment %}
@@ -11,21 +13,35 @@
 
 {% block content %}
 <main>
+		{% if cat_defined %}
     <section>
-	<div class="">
-	    <h1>{{category}} items</h1>
-	    <p>{{category.description}}.</p>
-	</div>
+			<div class="">
+					<h1>{{category}}</h1>
+					<p>{{category.description}}.</p>
+			</div>
     </section>
+		{% endif %}
 
-	<div>
+	<table>
 		{% for item in object_list%}
-		<div>
-		    <a href="{{item.get_absolute_url}}">
-				<p>{{item}}</p>
-		    </a>
-		</div>
+
+			<tr>
+				<td>
+					<a href="{{item.get_absolute_url}}"> {{item.name}} </a>
+				</td>
+				<td>
+					{{item.descr}}
+				</td>
+				<td>
+					<a href="{{item.get_absolute_url}}/edit">Edit Item </a>
+				</td>
+				<td>
+					TODO
+				</td>
+			</tr>
+
 		{% endfor %}
+	<table>
 
 	{% if is_paginated %}
 	<div class="pagination">
@@ -47,7 +63,6 @@
 	</div>
 	{% endif %}
 
-    </div>
 </main>
 {% endblock %}
 

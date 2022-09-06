@@ -38,6 +38,17 @@ class ItemCreateView(CreateView, DjMixin):
         c = DjMixin.get_context_data(self)
         context.update(c)
         return context
+"""
+    def get(self):
+      #if request.method == 'GET':
+      # display UserForm
+      pass
+
+    def post(self):
+      #request.method == 'POST':
+      # process form submission
+      pass
+"""
 
 
 
@@ -74,9 +85,9 @@ class MyFormView(FormView, DjMixin): #, ViewControllerSupport):
         menudata = self.yamlmenu()
         menu = {'menudata': menudata}
         context.update(menu)
-        context.update(c) 
+        context.update(c)
         return context
-   
+
     def get_form_kwargs(self):
         kwargs = super(MyFormView, self).get_form_kwargs()
         return kwargs
@@ -89,7 +100,8 @@ class MyFormView(FormView, DjMixin): #, ViewControllerSupport):
 
 class ItemListView(ListView, DjMixin): #ViewControllerSupport):
     model = Item
-    template_name = 'generic/page_djtable.html'
+    #template_name = 'items/item_list.html'
+    template_name = 'items/items_by_category.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -102,9 +114,10 @@ class ItemListView(ListView, DjMixin): #ViewControllerSupport):
             return self.access_denied()
         self.object_list = self.get_queryset()
         self.fields_noshow = []
-        table = ItemTable(self.object_list) #, template_name="generic/table.html" )
         context = {}
-        context['table'] = table
+        context['cat_defined'] = False
+        #table = ItemTable(self.object_list) #, template_name="generic/table.html" )
+        #context['table'] = table
         context.update(self.get_context_data())
         return self.render_to_response(context)
 

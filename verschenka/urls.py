@@ -12,8 +12,9 @@ urlpatterns = [
     path('cats', views.CategoryListView.as_view() , name='category-list'),
     path('cat/<str:slug>/', views.ItemsByCategoryView.as_view() , name='items-by-category'),
     #path('item/add/', views.MyFormView.as_view(), name='item-create'),
-    path('item/add/', views.ItemCreateView.as_view(), name='item-create'),
-    path('item/edit/<str:slug>', views.ItemUpdateView.as_view(), name='item-update'),
     path('item/<str:slug>/', views.ItemDetailView.as_view(), name='item-detail'),
+    path('item/add/', views.ItemCreateView.as_view(), name='item-create'),
+#    path('item/edit/<str:slug>', views.ItemUpdateView.as_view(), name='item-update'),
+    path('item/<str:slug>/edit', views.ItemUpdateView.as_view(), name='item-update'),
     #path('cat/<str:slug>/', views.ItemsByCategoryView.as_view() , name='category-detail'),
 ]

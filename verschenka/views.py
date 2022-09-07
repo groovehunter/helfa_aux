@@ -1,7 +1,8 @@
 from django.shortcuts import render
-
+from django.http import HttpResponse
 
 from django.views import generic
+from django.conf import settings
 from .models import Item, Category
 from django.views.generic import ListView, DetailView, CreateView, TemplateView
 from django.views.generic import FormView, UpdateView
@@ -10,10 +11,41 @@ from djflow.Controller import Controller
 from .tables import ItemTable
 from .forms import ItemForm
 from django.shortcuts import render
-
+from helfa_aux_dev_bot.bot import bot
 
 import logging
+import os
+import urllib3
 lg = logging.getLogger('root')
+#lg = logging.getLogger(__name__)
+
+chat_id = '-1001763189703'
+def tg_post(item):
+  msg = 'post item'
+  result = bot.sendMessage(chat_id, msg)
+  lg.debug(result)
+
+from requests_toolbelt import MultipartEncoder
+import requests
+
+
+#r = requests.post('http://httpbin.org/post', data=m,
+#                  headers={'Content-Type': m.content_type})
+
+#class ItemPostView...
+def tg_now(request, slug):
+  msg = 'NOW post item'
+  item = Item.objects.filter(slug=slug).first()
+  msg = '*'+item.name + '* \n ' + item.descr
+  furl = 'https://helfa99.loca.lt/static/img/JBL-TLX-30.jpg'
+  res2 = bot.sendPhoto(chat_id, photo=furl, caption=item.name)
+  result = bot.sendMessage(chat_id,
+      text=msg,
+      parse_mode=bot.PARSE_MODE_MARKDOWN)
+  #fn = os.path.join(settings.BASE_DIR, 'verschenka/JBL-TLX-30.jpg')
+  lg.debug(result)
+  lg.debug(res2)
+  return HttpResponse('OK DONE')
 
 class ItemUpdateView(UpdateView, DjMixin):
     model = Item
@@ -27,6 +59,19 @@ class ItemUpdateView(UpdateView, DjMixin):
         c = DjMixin.get_context_data(self)
         context.update(c)
         return context
+    """
+    def get_object(self, **kwargs):
+        lg.debug('get_object', kwargs)
+        pk = self.kwargs.get(self.pk_url_kwarg)
+        slug = self.kwargs.get(self.slug_url_kwarg)
+        obj = None
+        if pk is not None:
+            queryset = queryset.filter(pk=pk)
+            obj = queryset.get()
+            tg_post(obj)
+        self.obj = obj
+        return obj
+    """
 
 class ItemCreateView(CreateView, DjMixin):
     form_class = ItemForm
@@ -111,7 +156,8 @@ class ItemListView(ListView, DjMixin): #ViewControllerSupport):
 
     def get(self, request, *args, **kwargs):
         if not request.user.is_authenticated:
-            return self.access_denied()
+            #return self.access_denied()
+            pass
         self.object_list = self.get_queryset()
         self.fields_noshow = []
         context = {}
@@ -152,7 +198,7 @@ class ItemDetailView(DetailView, DjMixin): #ViewControllerSupport):
         context = {'object': self.get_object() }
         #context = {}
         context.update(self.get_context_data())
-        lg.debug(context)
+#        tg_post(self.object)
         return self.render_to_response(context)
 
 
@@ -184,9 +230,7 @@ class ItemsByCategoryView(ListView, ViewControllerSupport):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['category'] = self.category
-        #c = self.listview_helper()
         context.update(self.get_user_context())
-        #context.update(c)
         context.update(self.obj_cattree())
         return context
 

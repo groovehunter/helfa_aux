@@ -21,7 +21,5 @@ urlpatterns = [
     #path('/dj/verschenka/', include('verschenka.urls')), #, namespace='verschenka')),
     #path('/verschenka/', include('verschenka.urls')), #, namespace='verschenka')),
     path('helfa_aux_dev_bot/', include(helfa_aux_dev_bot_urls)),
-
     path('users/', include('users.urls')),
-
 ]

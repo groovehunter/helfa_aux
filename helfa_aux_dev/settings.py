@@ -8,6 +8,7 @@ from creds_my import mysql_pw
 from env import DATABASE_NAME, ENV #, ALLOWED_HOSTS
 from env import TELEGRAM_BOT_NAME, TELEGRAM_BOT_TOKEN, TELEGRAM_LOGIN_REDIRECT_URL, TELEGRAM
 
+BASE_URL = 'https://helfa99.loca.lt'
 ALLOWED_HOSTS = [
 'helfa-augsburg.ddnss.de',
 'helfa99.loca.lt',
@@ -154,7 +155,7 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-### dev 
+### dev
 
 logfn_debug = LOG_DIR + '/debug.log'
 logfn_piheat= LOG_DIR + '/piheat.log'

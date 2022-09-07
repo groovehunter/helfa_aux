@@ -17,4 +17,6 @@ urlpatterns = [
 #    path('item/edit/<str:slug>', views.ItemUpdateView.as_view(), name='item-update'),
     path('item/<str:slug>/edit', views.ItemUpdateView.as_view(), name='item-update'),
     #path('cat/<str:slug>/', views.ItemsByCategoryView.as_view() , name='category-detail'),
+    path('tg/', views.tg_now , name='tg-post'),
+    path('item/<str:slug>/post', views.tg_now, name='item-post'),
 ]
